@@ -1,23 +1,22 @@
-let initialGameBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-
-export default function GameBoard() {
+export default function GameBoard({ onTurn, board }) {
   return (
     <ol id="game-board">
-      {initialGameBoard.map((row, rowIndex) => 
+      {board.map((row, rowIndex) => (
         <li key={rowIndex}>
           <ol>
-            {row.map((col, colIndex) => 
+            {row.map((col, colIndex) => (
               <li key={colIndex}>
-                <button>{col}</button>
+                <button
+                  onClick={() => onTurn(rowIndex, colIndex)}
+                  disabled={col !== null}
+                >
+                  {col}
+                </button>
               </li>
-            )}
+            ))}
           </ol>
         </li>
-      )}
+      ))}
     </ol>
   );
 }
